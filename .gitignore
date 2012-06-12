@@ -3,3 +3,4 @@
 .localized
 .nbproject
 .svn
+deploy_local.sh
