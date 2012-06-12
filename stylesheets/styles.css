@@ -819,6 +819,12 @@ section #title .credits.left {
 section #title .credits.right {
   float: right;
 }
+section #disclaimer h4 {
+  margin-bottom: 4px;
+}
+section #disclaimer p {
+  font-size: 11px;
+}
 
 @media print, screen and (max-width: 720px) {
   #title .credits {
