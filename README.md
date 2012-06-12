@@ -1,4 +1,7 @@
-Views-for-Joomla-2.5
+Views for Joomla
 ====================
 
 Joomla latest news module + custom parameters
+
+Requrements:
+Joomla 2.5
