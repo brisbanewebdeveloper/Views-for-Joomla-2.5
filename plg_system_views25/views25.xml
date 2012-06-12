@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="2.5" type="plugin" group="system" method="upgrade">
+    <name>System - Views for Joomla</name>
+    <author>Hiro Nozu</author>
+    <creationDate>Feburary 2012</creationDate>
+    <copyright>Hiro Nozu - All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <authorEmail>contact@ideas.forjoomla.net</authorEmail>
+    <authorUrl>http://ideas.forjoomla.net/</authorUrl>
+    <version>0.0</version>
+    <description>This plugin let you call module file by setting com_module to option parameter in URL or POST data!</description>
+    <files>
+        <filename plugin="views25">views25.php</filename>
+        <filename>index.html</filename>
+    </files>
+    <languages />
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="custom_php_code" type="list" default="0" label="Custom PHP Feature (Read Tooltip ! )" description="Set Yes to enable Custom PHP feature. WARNING: This is very dangerous parameter. NOT RECOMMENDED if you are going to use the module settings made by someone else unless you are fine to get your Joomla site hacked !!">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+            </fieldset>
+        </fields>
+	</config>
+</install>
