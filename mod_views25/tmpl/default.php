@@ -40,9 +40,15 @@ if ($vfj_options->get('debug')) {
 }
 
 // Custom PHP logic
+/*
+// I disable the logic here as default to reduce the security risk.
+// $vfj_php_enabled gets FALSE if the system plugin has "No" at "Custom PHP Feature" option
+// regardless of the module settings.
+// Use this parameter at your own risk!
 if ($vfj_php_enabled) {
     eval($vfj_php);
 }
+*/
 // Custom CSS
 if ($vfj_css_enabled) {
     $doc->addStyleDeclaration($vfj_css);

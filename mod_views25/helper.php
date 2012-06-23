@@ -17,6 +17,8 @@ jimport('joomla.html.parameter');
 class modViewsHelper extends JObject
 {
     public static $self = null;
+    private static $plugins = null;
+
     public static function getInstance()
     {
         if ( ! self::$self) {
@@ -26,13 +28,28 @@ class modViewsHelper extends JObject
     }
     public static function getData(&$params)
     {
+        $app = JFactory::getApplication();
+
         // Set application parameters in model
-        // $app = JFactory::getApplication();
         // $appParams = $app->getParams();
 
         // Get an instance of the generic articles model
         // $model = JModel::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
         // $model->setState('params', $appParams);
+
+        // if ( ! class_exists('plgSystemViews25')) {
+        if (JPluginHelper::isEnabled('system', 'views25')) {
+            $plugin = JPluginHelper::getPlugin('system', 'views25');
+            $registry_plugin = new JRegistry;
+            $registry_plugin->loadString($plugin->params);
+        } else {
+            if ( ! defined('VIEWS25_WARN_NO_PLUGIN')) {
+                define('VIEWS25_WARN_NO_PLUGIN', true);
+                $app->enqueueMessage(JText::_('mod_views25: System Plugin is not installed/enabled!'), 'error');
+            }
+            return;
+        }
+
         $data = json_decode($params->get('data', '{}'));
 
         if ( ! $data->vfj_query) $data->vfj_query = 'SELECT \'Parameter query is empty\' AS message';
@@ -49,7 +66,7 @@ class modViewsHelper extends JObject
 
         $vfj_fields = $data->vfj_fields; // To enable to refer each field (which is Array) in the template
 
-        $vfj_php_enabled = $data->vfj_php_enabled;
+        $vfj_php_enabled = ($data->vfj_php_enabled and $registry_plugin->get('custom_php_code'));
         $vfj_php         = $data->vfj_php;
 
         $vfj_css_enabled = $data->vfj_css_enabled;
@@ -261,6 +278,40 @@ EOH;
                 $data['data'] = $fields;
         }
         echo json_encode($data);
+    }
+    public function getPlugins()
+    {
+        if (self::$plugins !== null) {
+            return self::$plugins;
+        }
+
+        $user  = JFactory::getUser();
+        $cache = JFactory::getCache('mod_views_views25_plugins', '');
+
+        $levels = implode(',', $user->getAuthorisedViewLevels());
+
+        if ( ! self::$plugins = $cache->get($levels)) {
+
+            self::$plugins = JPluginHelper::getPlugin('views25');
+            self::$plugins = array_merge(array(JPluginHelper::getPlugin('system', 'views25')), self::$plugins);
+
+            // Apply plugin
+            JPluginHelper::importPlugin('views25'); // Load (require_once) enabled plugins
+
+            $dispatcher = JDispatcher::getInstance();
+            foreach (self::$plugins as $plugin) {
+                $plugin_name = strtolower($plugin->name);
+                $class_name = ($plugin_name == 'views25') ? 'plgSystemViews25' : 'plgViews25'.ucfirst($plugin_name);
+                if (class_exists($class_name)) {
+                    $object = new $class_name($dispatcher, (array) $plugin);
+                    $plugin->object = $object;
+                }
+            }
+
+            $cache->store(self::$plugins, $levels);
+        }
+
+        return self::$plugins;
     }
     public function parse(&$field, &$vfj_param, &$record, &$vfj_options, &$params)
     {
