@@ -313,6 +313,16 @@ EOH;
 
         return self::$plugins;
     }
+    public function getManual($name, $type) {
+        $file_path = ($name == 'views25')
+                   ? JPATH_ROOT.DS.'plugins'.DS.'system'.DS.'views25'.DS.'manual.php'
+                   : JPATH_ROOT.DS.'plugins'.DS.'views25'.DS.$name.DS.'manual.php';
+        if ( ! file_exists($file_path)) return '';
+        require_once $file_path;
+        $function_name = $name.'GetManual';
+        if ( ! function_exists($function_name)) return '';
+        return $function_name($type);
+    }
     public function parse(&$field, &$vfj_param, &$record, &$vfj_options, &$params)
     {
         if (isset($record->$field)) {

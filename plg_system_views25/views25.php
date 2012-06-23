@@ -32,7 +32,7 @@ class plgSystemViews25 extends JPlugin
         // if your plugin has to be processed as follows:
         // if ( ! $this->isToBeParsed($plugins)) return;
 
-        // Each plugin is to be implemented the logic in this event by overriding this method
+        // Each plugin is to be implemented the logic for this event by overriding this method
         // $value = 'To manipulate this value is basically what your plugin does';
 
 
@@ -79,6 +79,14 @@ class plgSystemViews25 extends JPlugin
         $dispatcher->trigger('onContentPrepare', array ('mod_views25.article', &$item, &$params, $offset));
         $value = $item->text;
     }
+    /**
+     *
+     * Joomla pre-defined events
+     *
+     *
+     *
+     *
+     */
     public function onAfterRoute()
     {
         $app = JFactory::getApplication();
@@ -143,6 +151,9 @@ class plgSystemViews25 extends JPlugin
         $app = JFactory::getApplication();
 
         if ( ! $app->isAdmin()) return true;
+
+        require_once JPATH_ROOT.DS.'modules'.DS.'mod_views25'.DS.'helper.php';
+        $helper = modViewsHelper::getInstance();
 
         $jinput = $app->input;
         if ($jinput->get('option') != 'com_modules') return true;
@@ -696,25 +707,16 @@ EOH;
             $contents .= '<div class="clr"></div>';
         }
 
-        // @Todo This help can be put in an individual file
+        // Manual
+        $plugins = $helper->getPlugins();
+
         $contents .= '<div class="info">';
-        $contents .= <<<EOH
-<h3>About Parameters for field</h3>
-<table id="vfj-markup">
-<tr><th class="mark">Markup</th><th class="details">details</th></tr>
-<tr><td valign="top">{value}</td><td>The field value.</td></tr>
-<tr><td valign="top">{f:field}</td><td>The field value. Useful if you want to display multiple fields with main field.<br />e.g. value=&lt;a href="index.php?option=com_content&view=article&id={value}&Itemid=123"&gt;readmore about {f:title}&lt;/a&gt;</td></tr>
-<!--
-<tr><td valign="top">{url}</td><td>This parameter is used if the field is link. The value of this parameter will be embedded where {url} in value parameter.<br />e.g.<br />value=((a href="{url}"))readmore((/a))<br />
-url=index.php?option=com_content&view=article&id={value}</td></tr>
--->
-<tr><td valign="top">date_format=text</td><td>JHtml::_('date') is applied to {value}. e.g. date_format=Y/m/d <a target="_blank" href="http://www.php.net/manual/en/function.date.php">See Available Format</a></td></tr>
-<tr><td valign="top">user_timezone=1</td><td>Use user's timezone when date_format is applied.</td></tr>
-<tr><td valign="top">strip_tags=1</td><td>Strips HTML tags from the field value.</td></tr>
-<tr><td valign="top">strip_tags_excl=tags</td><td>Exceptions for strip_tag parameter. Separate by comma. e.g. strip_tags_excl=br,p,strong</td></tr>
-<tr><td valign="top">limit=n</td><td>First n characters of field value is displayed. If the value contains HTML, you probably have to use strip_tags parameter as well.</td></tr>
-</table>
-EOH;
+        $contents .= '<h3>About Parameters for field</h3>';
+        $contents .= '<table id="vfj-markup">';
+        foreach ($plugins as $plg) {
+            $contents .= $helper->getManual($plg->name, 'below_query_settings');
+        }
+        $contents .= '</table>';
         $contents .= '</div>';
 
         $contents .= '</fieldset>';
