@@ -282,7 +282,10 @@ EOH;
     }
     public function getPlugin($name)
     {
-        if (isset(self::$plugins_index[$plugin->name])) {
+        if ($name == '') return null;
+        $name = strtolower($name);
+        if ($name == 'default') $name = 'views25';
+        if (isset(self::$plugins_index[$name])) {
             return self::$plugins_index[$name];
         } else {
             return null;
@@ -308,13 +311,13 @@ EOH;
             JPluginHelper::importPlugin('views25'); // Load (require_once) enabled plugins
 
             $dispatcher = JDispatcher::getInstance();
-            foreach (self::$plugins as $plugin) {
+            foreach (self::$plugins as &$plugin) {
                 $plugin_name = strtolower($plugin->name);
                 $class_name = ($plugin_name == 'views25') ? 'plgSystemViews25' : 'plgViews25'.ucfirst($plugin_name);
                 if (class_exists($class_name)) {
                     $object = new $class_name($dispatcher, (array) $plugin);
                     $plugin->object = $object;
-                    self::$plugins_index[$plugin->name] = $plugin;
+                    self::$plugins_index[$plugin_name] = $plugin;
                 }
             }
 
@@ -341,9 +344,6 @@ EOH;
             $value = '';
         }
 
-        // Apply plugin
-        JPluginHelper::importPlugin('views25'); // Load (require_once) enabled plugins
-
         $plugins = explode(',', $vfj_param->get('plugin'));
 
         // Apply default plugin unless it is disabled by the parameter "no_default_plugin"
@@ -353,25 +353,12 @@ EOH;
 
         if (count($plugins)) {
 
-            // I have decided to not use this way because I cannot execute the plugin logic in a specific order per module
-            // Make the plugin name case insensitive
-            // foreach($plugins as &$plugin) $plugin = strtolower($plugin);
-            // $dispatcher = JDispatcher::getInstance();
-            // $dispatcher->trigger('onParse', array(&$value, &$field, &$vfj_param, &$record, &$params, &$plugins));
+            $this->getPlugins(); // Load all plugins
 
-            $dispatcher = JDispatcher::getInstance();
             foreach ($plugins as &$plugin) {
-                $plugin = strtolower($plugin);
-                $class_name = ($plugin == 'default') ? 'plgSystemViews25' : 'plgViews25'.ucfirst($plugin);
-                if (class_exists($class_name)) {
-                    if ($plugin == 'default') {
-                        $plugin_data = (array) JPluginHelper::getPlugin('system', 'views25');
-                    } else {
-                        $plugin_data = (array) JPluginHelper::getPlugin('views25', $plugin);
-                    }
-                    $plugin_object = new $class_name($dispatcher, $plugin_data);
-                    if (method_exists($plugin_object, 'onParse'))
-                        $plugin_object->onParse($value, $field, $vfj_param, $record, $params, $plugins);
+                $plugin_class = $this->getPlugin($plugin);
+                if (method_exists($plugin_class->object, 'onParse')) {
+                    $plugin_class->object->onParse($value, $field, $vfj_param, $record, $params, $plugins);
                 }
             }
         }
