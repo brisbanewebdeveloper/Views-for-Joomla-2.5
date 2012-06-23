@@ -18,6 +18,7 @@ class modViewsHelper extends JObject
 {
     public static $self = null;
     private static $plugins = null;
+    private static $plugins_index = null;
 
     public static function getInstance()
     {
@@ -279,6 +280,14 @@ EOH;
         }
         echo json_encode($data);
     }
+    public function getPlugin($name)
+    {
+        if (isset(self::$plugins_index[$plugin->name])) {
+            return self::$plugins_index[$name];
+        } else {
+            return null;
+        }
+    }
     public function getPlugins()
     {
         if (self::$plugins !== null) {
@@ -305,6 +314,7 @@ EOH;
                 if (class_exists($class_name)) {
                     $object = new $class_name($dispatcher, (array) $plugin);
                     $plugin->object = $object;
+                    self::$plugins_index[$plugin->name] = $plugin;
                 }
             }
 
