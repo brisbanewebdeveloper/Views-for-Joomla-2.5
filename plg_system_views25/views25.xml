@@ -11,6 +11,7 @@
     <description>This plugin let you call module file by setting com_module to option parameter in URL or POST data!</description>
     <files>
         <filename plugin="views25">views25.php</filename>
+        <filename>manual.php</filename>
         <filename>index.html</filename>
     </files>
     <languages />
