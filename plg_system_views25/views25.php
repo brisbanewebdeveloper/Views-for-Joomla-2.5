@@ -821,12 +821,12 @@ EOH;
         $contents .= '<p><a class="button" target="_blank" href="http://forjoomla.uservoice.com/knowledgebase">Knowledge Base</a></p>';
         /*
         $contents .= '<p><a class="modal" rel="{handler: \'iframe\', size: {x: 800, y: 700}}" href="http://ideas.forjoomla.net/contact?tmpl=component">Send Feedback, Feature Request etc</a></p>';
-        $contents .= '<p><a class="modal" rel="{handler: \'iframe\', size: {x: 800, y: 700}}" href="http://ideas.forjoomla.net/submit-your-views-for-joomla-setting?tmpl=component">Share your settings to let our lives easier</a></p>';
+        $contents .= '<p><a class="modal" rel="{handler: \'iframe\', size: {x: 800, y: 700}}" href="http://ideas.forjoomla.net/share-your-views-for-joomla-setting?tmpl=component">Share your settings to let our lives easier</a></p>';
         */
         // $contents .= '<p><a class="button" target="_blank" href="http://ideas.forjoomla.net/contact">Send Feedback, Feature Request etc</a></p>';
         $contents .= '<p><a class="button" title="Open feedback & support dialog (powered by UserVoice)" href="javascript:UserVoice.showPopupWidget();">Feedback &amp; Support</a></p>';
         $contents .= '<p><a class="button" target="_blank" href="http://ideas.forjoomla.net/contact">Send Feedback, Feature Request etc at Ideas for Joomla website</a></p>';
-        $contents .= '<p><a class="button" target="_blank" href="http://ideas.forjoomla.net/submit-your-views-for-joomla-setting">Share your settings to let our lives easier</a></p>';
+        $contents .= '<p><a class="button" target="_blank" href="http://ideas.forjoomla.net/share-your-views-for-joomla-setting">Share your settings to let our lives easier</a></p>';
         $contents .= '<p><a class="button" target="_blank" href="http://twitter.com/hironozu">Follow the author on Twitter</a></p>';
         $contents .= '</fieldset>';
 
