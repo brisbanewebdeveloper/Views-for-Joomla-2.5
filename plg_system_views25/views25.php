@@ -225,12 +225,16 @@ var vfjMgr = {
         vfjMgr.apply_result({
             not_ask: true,
             onComplete: function() {
-                $$('#vfjForm .vfj_fields').each(function(item, index) {
-                    item.value = data.vfj_fields[index];
-                });
-                $$('#vfjForm .vfj_params').each(function(item, index) {
-                    item.value = data.vfj_params[index];
-                });
+                if (data.vfj_fields) {
+                    $$('#vfjForm .vfj_fields').each(function(item, index) {
+                        item.value = data.vfj_fields[index];
+                    });
+                }
+                if (data.vfj_params) {
+                    $$('#vfjForm .vfj_params').each(function(item, index) {
+                        item.value = data.vfj_params[index];
+                    });
+                }
             }
         });
     },
