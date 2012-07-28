@@ -152,7 +152,10 @@ class plgSystemViews25 extends JPlugin
 
         if ( ! $app->isAdmin()) return true;
 
-        require_once JPATH_ROOT.DS.'modules'.DS.'mod_views25'.DS.'helper.php';
+        $helper_path = JPATH_ROOT.DS.'modules'.DS.'mod_views25'.DS.'helper.php';
+        if ( ! file_exists($helper_path)) return true;
+
+        require_once $helper_path;
         $helper = modViewsHelper::getInstance();
 
         $jinput = $app->input;
