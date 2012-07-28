@@ -163,7 +163,7 @@ class plgSystemViews25 extends JPlugin
         $db  = JFactory::getDbo();
         $doc = JFactory::getDocument();
 
-        $custom_php_code = $this->params->get('custom_php_code');
+        $custom_php_code = $this->params->get('custom_php_code', 'false');
 
         // Layout fields
         $doc->addScriptDeclaration("
