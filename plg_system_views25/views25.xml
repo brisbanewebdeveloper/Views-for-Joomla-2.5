@@ -7,7 +7,7 @@
     <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
     <authorEmail>contact@ideas.forjoomla.net</authorEmail>
     <authorUrl>http://ideas.forjoomla.net/</authorUrl>
-    <version>0.1</version>
+    <version>0.2</version>
     <description>This plugin let you call module file by setting com_module to option parameter in URL or POST data!</description>
     <files>
         <filename plugin="views25">views25.php</filename>
