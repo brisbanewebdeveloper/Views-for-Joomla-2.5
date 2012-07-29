@@ -58,9 +58,10 @@ if ($vfj_scripts_enabled) {
     $doc->addScriptDeclaration($vfj_scripts);
 }
 
-foreach($rows as $index => $record) {
-    foreach($vfj_fields as $index => &$field) {
-        $value = $helper->parse($field, $vfj_params[$index], $record, $vfj_options, $params);
+foreach($rows as $index_row => $record) {
+    foreach($vfj_fields as $index_col => &$field) {
+        // $value = $record->$field; // Raw Value
+        $value = $helper->parse($field, $vfj_params[$index_col], $record, $vfj_options, $params);
         if ($value) echo $value;
     }
 }

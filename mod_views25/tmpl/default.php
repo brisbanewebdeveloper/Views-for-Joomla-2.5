@@ -60,17 +60,18 @@ if ($vfj_scripts_enabled) {
 ?>
 <div class="box-1">
 <?php
-foreach($rows as $index => $record) {
+foreach($rows as $index_row => $record) {
 ?>
-    <div class="box-2 <?php echo ($index % 2 == 0) ? 'even' : 'odd'; ?>">
+    <div class="box-2 <?php echo ($index_row % 2 == 0) ? 'even' : 'odd'; ?>">
 <?php
-    foreach($vfj_fields as $index => &$field) {
+    foreach($vfj_fields as $index_col => &$field) {
 
-        $value = $helper->parse($field, $vfj_params[$index], $record, $vfj_options, $params);
+        // $value = $record->$field; // Raw Value
+        $value = $helper->parse($field, $vfj_params[$index_col], $record, $vfj_options, $params);
 
         if ($value) {
 ?>
-    <div class="box-3 value-<?php echo $index; ?>"><?php echo $value; ?></div>
+    <div class="box-3 value-<?php echo $index_col; ?>"><?php echo $value; ?></div>
 <?php
         }
     }
