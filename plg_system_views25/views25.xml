@@ -13,6 +13,7 @@
         <filename plugin="views25">views25.php</filename>
         <filename>manual.php</filename>
         <filename>index.html</filename>
+        <folder>assets</folder>
     </files>
     <languages />
     <config>
