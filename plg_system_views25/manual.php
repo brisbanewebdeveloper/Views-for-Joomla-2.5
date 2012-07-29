@@ -18,8 +18,8 @@ function views25GetManual($type) {
             $text = <<<EOH
 <tr><th colspan="2">General</th></tr>
 <tr><th class="mark">Markup</th><th class="details">details</th></tr>
-<tr><td valign="top">{value}</td><td>The field value.</td></tr>
-<tr><td valign="top">{f:field}</td><td>The field value. Useful if you want to display multiple fields with main field.<br />e.g. value=&lt;a href="index.php?option=com_content&view=article&id={value}&Itemid=123"&gt;readmore about {f:title}&lt;/a&gt;</td></tr>
+<tr><td valign="top">value={value}</td><td>The field value. If you need a block element wrapping the value, just put like value=&lt;h4 class="sample"&gt;{value}&lt;/h4&gt;</td></tr>
+<tr><td valign="top">value={f:field}</td><td>The field value. Useful if you want to display multiple fields with main field.<br />e.g. value=&lt;a href="index.php?option=com_content&view=article&id={value}&Itemid=123"&gt;readmore about {f:title}&lt;/a&gt;</td></tr>
 <!--
 <tr><td valign="top">{url}</td><td>This parameter is used if the field is link. The value of this parameter will be embedded where {url} in value parameter.<br />e.g.<br />value=((a href="{url}"))readmore((/a))<br />
 url=index.php?option=com_content&view=article&id={value}</td></tr>
