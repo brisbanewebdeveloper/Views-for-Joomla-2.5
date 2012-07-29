@@ -432,6 +432,9 @@ window.addEvent('domready', function() {
     $('vfj_layout_button').addEvent('click', function() { vfjMgr.preview(); });
 
     vfjMgr.parse_setting();
+
+    // To enable to style Manual part at bottom
+    $$('#vfj-markup tr').getElement('td').each(function(item) { if ( item && ! item.hasClass('first')) item.addClass('first'); });
 });
 ");
 
@@ -561,6 +564,16 @@ window.addEvent('domready', function() {
             width: 80%;
             height: 300px;
         }
+        .vfj div.info {
+        }
+            table#vfj-markup {
+            }
+                table#vfj-markup th.markup,
+                table#vfj-markup td.first {
+                    padding-right: 10px;
+                }
+                table#vfj-markup th.details {
+                }
     div.current .vfj_feedback {
         padding-top: 32px;
     }
