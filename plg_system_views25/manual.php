@@ -26,6 +26,7 @@ url=index.php?option=com_content&view=article&id={value}</td></tr>
 -->
 <tr><td valign="top">date_format=text</td><td>JHtml::_('date') is applied to {value}. e.g. date_format=Y/m/d <a target="_blank" href="http://www.php.net/manual/en/function.date.php">See Available Format</a></td></tr>
 <tr><td valign="top">user_timezone=1</td><td>Use user's timezone when date_format is applied.</td></tr>
+<tr><td valign="top">get_element=tag</td><td>Extract HTML tag from the field value. This executes strip_tags(field_value, '&lt;tag&gt;'). If you need to extract multiple tags, use strip_tags and strip_tags_excl instead.<br />e.g. get_element=img makes {value} have only IMG tag(s).</td></tr>
 <tr><td valign="top">strip_tags=1</td><td>Strips HTML tags from the field value.</td></tr>
 <tr><td valign="top">strip_tags_excl=tags</td><td>Exceptions for strip_tag parameter. Separate by comma. e.g. strip_tags_excl=br,p,strong</td></tr>
 <tr><td valign="top">limit=n</td><td>First n characters of field value is displayed. If the value contains HTML, you probably have to use strip_tags parameter as well.</td></tr>

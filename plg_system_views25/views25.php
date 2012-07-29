@@ -52,6 +52,11 @@ class plgSystemViews25 extends JPlugin
             }
         }
 
+        // Extract Tag
+        if ($vfj_param->get('get_element')) {
+            $value = strip_tags($value, '<'.$vfj_param->get('get_element').'>');
+        }
+
         // $url = $vfj_param->get('url') ? JRoute::_($vfj_param->get('url')) : '';
 
         // Replace some parts in the value to the field(s)
