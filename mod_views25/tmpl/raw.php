@@ -60,7 +60,13 @@ if ($vfj_scripts_enabled) {
 
 foreach($rows as $index_row => $record) {
     foreach($vfj_fields as $index_col => &$field) {
-        // $value = $record->$field; // Raw Value
+
+        // Example of Getting Raw Field Value
+        // $value = $record->$field;
+
+        // Example of Getting Raw Field Value after checking if this column is to display something
+        // if ($field) $value = $record->$field;
+
         $value = $helper->parse($field, $vfj_params[$index_col], $record, $vfj_options, $params);
         if ($value) echo $value;
     }
