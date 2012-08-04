@@ -60,6 +60,7 @@ class plgSystemViews25 extends JPlugin
         // $url = $vfj_param->get('url') ? JRoute::_($vfj_param->get('url')) : '';
 
         // Replace some parts in the value to the field(s)
+        // value={f:field}
         $param_value = $vfj_param->get('value');
         preg_match_all('/{f:([^}]+)}/', $param_value, $matches);
         if (isset($matches[1][0])) {
