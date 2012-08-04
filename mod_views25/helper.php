@@ -376,7 +376,10 @@ EOH;
             $param_value
         );
         */
-        $value = preg_replace('/{value}/', $value, $vfj_param->get('value'));
+        // Parameter value_transformed gets created plgSystemViews25::onParse.
+        // The parameter is the return value from the method plgSystemViews25::transformValue.
+        // The method replaces {f:field} to the actual value.
+        $value = preg_replace('/{value}/', $value, $vfj_param->get('value_transformed'));
 
         return $value;
     }

@@ -24,6 +24,16 @@ class plgSystemViews25 extends JPlugin
         return in_array(strtolower($this->type), $plugins);
     }
     */
+    // Replace some parts in the value to the field(s) with {f:field}
+    public function transformValue($value, &$record) {
+        preg_match_all('/{f:([^}]+)}/', $value, $matches);
+        if (isset($matches[1][0])) {
+            foreach($matches[1] as $index => $match) {
+                $value = preg_replace('/'.$matches[0][$index].'/', $record->$match, $value);
+            }
+        }
+        return $value;
+    }
     public function onParse(&$value, &$field, &$vfj_param, &$record, &$params, &$plugins) {
 
         // -> This is obsolete
@@ -59,16 +69,8 @@ class plgSystemViews25 extends JPlugin
 
         // $url = $vfj_param->get('url') ? JRoute::_($vfj_param->get('url')) : '';
 
-        // Replace some parts in the value to the field(s)
-        // value={f:field}
-        $param_value = $vfj_param->get('value');
-        preg_match_all('/{f:([^}]+)}/', $param_value, $matches);
-        if (isset($matches[1][0])) {
-            foreach($matches[1] as $index => $match) {
-                $param_value = preg_replace('/'.$matches[0][$index].'/', $record->$match, $param_value);
-            }
-            $vfj_param->set('value', $param_value);
-        }
+        // Replace some parts in the value to the field(s) with {f:field}
+        $vfj_param->set('value_transformed', $this->transformValue($vfj_param->get('value'), $record));
 
         // Limit the length of the value
         if ($vfj_param->get('limit')) {
