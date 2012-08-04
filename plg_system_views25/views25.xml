@@ -27,6 +27,6 @@
         </fields>
 	</config>
     <updateservers>
-        <server type="extension" priority="1" name="Views for Joomla Module Updates"><![CDATA[http://ideas.forjoomla.net/index.php?option=com_ars&view=update&task=stream&format=xml&id=2&dummy=extension.xml]]></server>
+        <server type="extension" priority="1" name="Views for Joomla System Plugin Updates"><![CDATA[http://ideas.forjoomla.net/index.php?option=com_ars&view=update&task=stream&format=xml&id=2&dummy=extension.xml]]></server>
     </updateservers>
 </install>
