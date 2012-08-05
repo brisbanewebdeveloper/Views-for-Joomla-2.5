@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="2.5" type="plugin" group="views25" method="upgrade">
+	<name>Views for Joomla - Image</name>
+	<author>Hiro Nozu</author>
+	<creationDate>March 2012</creationDate>
+	<copyright>2012 Hiro Nozu - All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>support@ideas.forjoomla.net</authorEmail>
+	<authorUrl>http://ideas.forjoomla.net/</authorUrl>
+	<version>0.0</version>
+	<description>This plugin provides image manipulation.</description>
+	<files>
+		<filename>index.html</filename>
+		<filename plugin="image">image.php</filename>
+	</files>
+	<config/>
+    <updateservers>
+        <server type="extension" priority="1" name="Views for Joomla Image Plugin Updates"><![CDATA[http://ideas.forjoomla.net/index.php?option=com_ars&view=update&task=stream&format=xml&id=3&dummy=extension.xml]]></server>
+    </updateservers>
+</install>
