@@ -576,6 +576,10 @@ window.addEvent('domready', function() {
         }
             table#vfj-markup {
             }
+                table#vfj-markup th,
+                table#vfj-markup td {
+                    vertical-align: top;
+                }
                 table#vfj-markup th.markup,
                 table#vfj-markup td.first {
                     padding-right: 10px;
@@ -742,6 +746,7 @@ EOH;
         $contents .= '<h3>About Parameters for field</h3>';
         $contents .= '<table id="vfj-markup">';
         foreach ($plugins as $plg) {
+            $contents .= '<tr><td colspan="2">&nbsp;</td></tr>';
             $contents .= $helper->getManual($plg->name, 'below_query_settings');
         }
         $contents .= '</table>';
