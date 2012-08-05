@@ -5,4 +5,4 @@
 .svn
 deploy_local.sh
 mod_views25_*.zip
-plg_system_views25_*.zip
+plg_*.zip
